@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src=""></script>
+    <title>Login: AutoMob-Mechainic</title>
+</head>
+<body>
+    <div class="login-container">
+            
+            <form id="loginForm" onsubmit="validateLogin()">
+                <h1>SIGN IN</h1>
+                <div id="user">
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div id="pass">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <p id="message"></p>
+                <button type="submit" id="loginBtn" onsubmit="validateLogin()">Login</button>
+            </form>
+    </div>
+</body>
+<style>
+    body{
+        
+        align-content: center;
+        justify-content: center;
+        display: flex;
+        min-height: 100vh;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        background: linear-gradient(to bottom,rgb(125, 201, 245), rgb(73, 70, 157));;
+    }
+    .login-container{
+        border: 1px solid black;
+        height: 300px;
+        width: 300px;
+        border-radius: 20px;
+        align-content: center;
+        justify-content: center;
+        display: flex;
+        text-align: center;
+        background-color: #113f67;
+        color: aliceblue;
+        text-shadow: 0px 0px 5px aqua;
+    }
+    .login-container:hover{
+        box-shadow: 0px 0px 10px aqua;
+        transition: 1s;
+        background-color:lightblue;
+        color: #113f67;
+        text-shadow: 0px 0px 5px #113f67;
+    }
+
+    
+    .login-container div input{
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+    box-shadow: 0px 0px 10px rgb(0, 7, 7);
+        transition: 1s;
+    }
+    .login-container div input:hover{
+        box-shadow: 0px 0px 10px aqua;
+        transition: 1s;
+    }
+
+
+    .login-container div{
+        margin: 5px;
+        padding: 10px;
+    }
+    #loginBtn{
+        height: 40px;
+        width: 100px;
+        font-size: 15px;
+        margin: 5px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px black;
+        transition: 1s;
+    }
+    #loginBtn:hover{
+        box-shadow: 0px 0px 10px aqua;
+        transition: 1s;
+    }
+    
+</style>
+<script>
+    // function validate(){
+    //     // Function to handle login
+    // document.getElementById('loginForm').addEventListener('submit',function(){
+    //     const username = document.getElementById('username').value;
+    //     const password = document.getElementById('password').value;
+    //     users = [
+    //     {"username":"admin","password": "admin","role":"admin"},
+    //     {"username": "Razor", "password": "Razor123", "role": "user"},
+    //     {"username": "Bull", "password": "Bull456", "role": "user"},
+    //     {"username": "Ronnie", "password": "Ronnie789", "role": "user"},
+    //     {"username": "JV", "password": "JV0123", "role": "user"},
+    //     {"username": "Earl", "password": "Earl456", "role": "user"},
+    //     {"username": "Ming", "password": "Ming789", "role": "user"},
+    //     {"username": "Webster", "password": "Webster0123", "role": "user"},
+    //     {"username": "Barons", "password": "Barons456", "role": "user"},
+    //     {"username": "Kaze", "password": "Kaze789", "role": "user"},
+    //     {"username": "BigLou", "password": "BigLou0123", "role": "user"},
+    //     {"username": "Izzy", "password": "Izzy456", "role": "user"},
+    //     {"username": "Vic", "password": "Vic789", "role": "user"},
+    //     {"username": "Taz", "password": "Taz0123", "role": "user"},
+    //     {"username": "Sonny", "password": "Sonny456", "role": "user"}
+    //     ];
+ 
+    //     try {
+        
+    //          // Check if user exists and password matches
+    //         var user = users.find(function(u){
+    //             return u.username === username && u.password === password
+    //         })
+    //          if (user) {
+    //              // Store user details in session storage
+    //             sessionStorage.setItem('loggedIn', true);
+    //             sessionStorage.setItem('username', user.username);
+    //             sessionStorage.setItem('userRole', user.role);
+    //             document.getElementById("message").innerHTML="Login Successful!";
+    //             alert("Redirecting");
+    //             // Redirect to home page
+    //             return true;
+    //         } else {
+    //             // Display error message
+    //             alert('Invalid credentials. Please try again')
+    //             return false;
+    //         }
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //         alert('An error occurred. Please try again later.');
+    //     }
+    // });
+    // }
+    function validateLogin() {
+            // Fetch JSON array from users.json
+            fetch('users.json')
+                .then(response => response.json())
+                .then(data => {
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    const user = data.find(user => user.username === username && user.password === password);
+                    
+                    if (user) {
+                        // Store user role in sessionStorage
+                        sessionStorage.setItem('userRole', user.role);
+                        alert('Login successful');
+                        
+                        // Redirect to home page
+                        location.assign('Home.html');
+                    } else {
+                        alert('Invalid username or password');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+</script>
+</html>
